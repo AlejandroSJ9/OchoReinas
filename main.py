@@ -34,7 +34,7 @@ def resolver_ocho_reinas():
         for fila in range(8):
             for columna in range(8):
                 if tablero[fila] == columna:
-                    print("2", end=" ")
+                    print("Q", end=" ")
                 else:
                     print(".", end=" ")
             print()
