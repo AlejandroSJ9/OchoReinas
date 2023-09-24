@@ -9,37 +9,34 @@ def es_seguro(tablero, fila, columna):
     
     return True
 
-
-def colocar_reina(tablero, fila):
+def resolver_ocho_reinas():
+    tablero = [-1] * 8
+    soluciones = []
+    encontrar_todas_soluciones(tablero, 0, soluciones)
     
+    if soluciones:
+        print("Se encontraron", len(soluciones), "soluciones:")
+        for solucion in soluciones:
+            for fila in range(8):
+                for columna in range(8):
+                    if solucion[fila] == columna:
+                        print("Q", end=" ")
+                    else:
+                        print(".", end=" ")
+                print()
+            print()
+    else:
+        print("No se encontró ninguna solución.")
+
+def encontrar_todas_soluciones(tablero, fila, soluciones):
     if fila >= 8:
-        return True
+        soluciones.append(tablero[:])  # Almacenar una copia de la solución encontrada
+        return
     
     for columna in range(8):
         if es_seguro(tablero, fila, columna):
             tablero[fila] = columna
-            if colocar_reina(tablero, fila + 1):
-                return True
+            encontrar_todas_soluciones(tablero, fila + 1, soluciones)
             tablero[fila] = -1
-    
-    return False
-
-
-def resolver_ocho_reinas():
-    
-    tablero = [-1] * 8
-    
-    if colocar_reina(tablero, 0):
-        print("Solución encontrada:")
-        for fila in range(8):
-            for columna in range(8):
-                if tablero[fila] == columna:
-                    print("Q", end=" ")
-                else:
-                    print(".", end=" ")
-            print()
-    else:
-        print("No se encontró solución.")
-
 
 resolver_ocho_reinas()
